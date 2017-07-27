@@ -41,7 +41,7 @@ templates/
 dist後
 
 ```javascript
-pc/html/xxx.html
+html/xxx.html
 ```
 
 
@@ -59,8 +59,8 @@ style/
 dist後
 
 ```javascript
-pc/common/css/common.css
-pc/css/xxx.css
+common/css/common.css
+css/xxx.css
 ```
 
 ### JS
@@ -78,8 +78,8 @@ js/
 dist後
 
 ```javascript
-pc/common/js/common.js
-pc/js/xxx.js
+common/js/common.js
+js/xxx.js
 ```
 
 ### その他
@@ -96,9 +96,9 @@ copy/ // そのままコピーされます
 dist後
 
 ```javascript
-pc/common/images/xxx.png
-pc/images/xxx.png
-pc/data/xxx.json
+common/images/xxx.png
+images/xxx.png
+data/xxx.json
 ```
 
 ## Versions
