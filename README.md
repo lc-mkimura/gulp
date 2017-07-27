@@ -1,8 +1,8 @@
-# Gulp Template
+# Gulp Template Lite
 
 ## 概要
 
-- Gulpのテンプレートデータ
+- Gulpの最低限の機能のみのテンプレートデータ
 
 ### 初期実行
 
