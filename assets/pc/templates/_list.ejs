@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>画面一覧</title>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style>
+* { margin: 0; padding: 0; }
+.page { max-width: 980px; min-width: 950px; margin: 0 auto; padding: 30px 0 80px; color: #333; }
+h1 { padding-bottom: 30px; font-size: 20px; }
+.listTable { width: 100%; border-collapse: collapse; }
+.listTable th, .listTable td { padding: 7px 10px; vertical-align: top; border: 1px solid #ccc; font-size: 12px; }
+.listTable thead th { background: #eee; }
+.listTable tbody th, .listTable tbody td { text-align: left; }
+.listTable tbody td:first-child { text-align: center; }
+.col1 { width: 7%; } .col2 { width: 25%; } .col3 { width: 25%; } .col4 { width: 10%; } .col5 { width: 8%; } .col6 { width: ; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header>
+    <h1>画面一覧</h1>
+  </header>
+
+  <main>
+
+    <table summary="" class="listTable" id="ListTableView">
+      <colgroup>
+        <col class="col1"><col class="col2"><col class="col3"><col class="col4"><col class="col5"><col class="col6">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>画面ID</th><th>画面名</th><th>URL</th><th>ステータス</th><th>納品日</th><th>備考</th>
+        </tr>
+      </thead>
+      <tbody class="js-renderTarget">
+      </tbody>
+    </table>
+
+  </main>
+
+</div><!--/.page -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$(function() {
+
+  var ListTableView = (function() {
+    var constructor = function(args) {
+      this.$el = {};
+      this.$renderTarget = {};
+      this.dataPath = '';
+      this.collection = {};
+      this.init(args);
+      return this;
+    };
+    var proto = constructor.prototype;
+    proto.init = function(args) {
+      this.dataPath = args.dataPath || undefined;
+      this.setEl(args.el);
+      this.dataPath ? this.getFeed() : this.error('URL');
+      return this;
+    };
+    proto.setEl = function(el) {
+      this.$el = $(el);
+      this.$renderTarget = this.$el.find('.js-renderTarget');
+      return this;
+    };
+    proto.getFeed = function() {
+      var that = this;
+      $.ajax({
+        type: 'get',
+        url: that.dataPath,
+        dataType: 'json',
+      }).done(function(data) {
+        that.collection = data.list;
+        that.render();
+      }).fail(function() {
+        that.error('データ');
+      });
+      return this;
+    };
+    proto.render = function() {
+      var tmpl = [];
+      for(var i=0; i<this.collection.length; i++) {
+        var model = this.collection[i];
+        tmpl.push('<tr>');
+        tmpl.push('  <td>' + model.no + '</td>');
+        tmpl.push('  <th>' + model.name + '</th>');
+        tmpl.push('  <td><a href="' + model.url + '" target="_blank">' + model.url + '</a></td>');
+        tmpl.push('  <td>' + model.status + '</td>');
+        tmpl.push('  <td>' + model.limit + '</td>');
+        tmpl.push('  <td>' + model.notes + '</td>');
+        tmpl.push('</tr>');
+      }
+      this.$renderTarget.append(tmpl.join(''));
+      return this;
+    };
+    proto.error = function(str) {
+      alert(str + 'がありません');
+      return this;
+    };
+    return constructor;
+  })();
+
+  $(window).on('load', function() {
+    new ListTableView({
+      el: '#ListTableView',
+      dataPath: '/_list.json'
+    });
+  });
+
+})
+</script>
+</body>
+</html>

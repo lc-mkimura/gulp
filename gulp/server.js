@@ -13,7 +13,7 @@ module.exports = function () {
         directory: false,
         middleware: [
           rewrite([
-            '^[^\\.]*$ /index.html [L]'
+            '^[^\\.]*$ /_list.html [L]'
           ])
         ]
       },

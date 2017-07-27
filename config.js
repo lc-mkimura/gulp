@@ -5,7 +5,7 @@ module.exports = {
     // 出力先ディレクトリ
     dist: 'dist/%type%/',
     // gulpコマンドでデフォルトで監視するディレクトリ(assets/*/)
-    defaultPath: '',
+    defaultPath: 'pc',
     // サーバー設定
     server: {
       ghostMode: {
@@ -66,6 +66,10 @@ module.exports = {
         },
         {
           from: 'assets/%type%/copy/**/*',
+          to: 'dist/%type%'
+        },
+        {
+          from: 'assets/%type%/data/**/*',
           to: 'dist/%type%'
         },
         {
