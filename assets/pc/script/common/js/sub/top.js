@@ -6,20 +6,6 @@ $(function() {
   var utils = App.utils;
   var views = App.views;
 
-  /**
-   * インスタンス
-   */
-  var viewInstance = function() {
 
-
-
-  };
-
-
-
-  /* インスタンス */
-  $(window).load(function() {
-    viewInstance();
-  });
 
 });
