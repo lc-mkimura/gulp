@@ -18,6 +18,8 @@ gulp
 
 # 指定ディレクトリを監視（assets/spディレクトリを監視する例)
 gulp -sp
+
+ディレクトリ監視に初期実行時はファイル一覧（_list.html）が表示されます
 ```
 
 ### リリースファイル作成
@@ -101,11 +103,26 @@ images/xxx.png
 data/xxx.json
 ```
 
+### ファイル一覧
+
+assets
+
+```javascript
+templates/_list.ejs
+data/_list.json // ファイルの追加は_list.jsonに追記するだけです
+```
+
+dist後 はルートに出力されます
+
+```javascript
+_list.html // 納品ファイルに含めないように、ファイル名の先頭にアンダースコアをつけています
+_list.json // 納品ファイルに含めないように、ファイル名の先頭にアンダースコアをつけています
+```
+
 ## Versions
 
 - node 4.5.0
 - npm 5.0.4
-- gulp-cli 1.2.2
 
 ## 使用ツール
 
