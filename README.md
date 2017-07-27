@@ -87,7 +87,7 @@ js/xxx.js
 assets
 
 ```javascript
-copy/ // そのままコピーされます
+copy/ // 画像やフォント等、そのまま出力したいものはcopy配下に入れます
   common/images/xxx.png
   images/xxx.png
   data/xxx.json

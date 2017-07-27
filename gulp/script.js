@@ -6,15 +6,12 @@ var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
     concat = require('gulp-concat'),
     named = require('vinyl-named');
-var conf = require('../webpack.config.js');
 
 /**
  * コンパイル開始
- * @param watch
  * @returns {*}
  */
-function exeWebPack(watch) {
-  conf.watch = watch;
+function exeWebPack() {
   return gulp.src(__CONFIG.path.jsconcat.src)
     .pipe(named())
     .pipe(plumber())
@@ -24,8 +21,7 @@ function exeWebPack(watch) {
     .pipe($.browser.stream());
 }
 
-function exeScript(watch) {
-  conf.watch = watch;
+function exeScript() {
   return gulp.src(__CONFIG.path.js.src)
     .pipe(named())
     //.pipe($.uglify()) //圧縮します
@@ -33,9 +29,9 @@ function exeScript(watch) {
     .pipe($.browser.stream());
 }
 
-function taskScript(watch) {
-  exeWebPack(watch);
-  exeScript(watch);
+function taskScript() {
+  exeWebPack();
+  exeScript();
   return;
 }
 
@@ -43,12 +39,12 @@ function taskScript(watch) {
  * スクリプトコンパイルタスク
  */
 gulp.task('script', function() {
-  return taskScript(false);
+  return taskScript();
 });
 
 /**
  * スクリプト監視タスク
  */
 gulp.task('watchScript', function() {
-  return taskScript(true);
+  return taskScript();
 });
